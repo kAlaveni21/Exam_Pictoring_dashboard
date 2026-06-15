@@ -5,7 +5,8 @@ const extensions = {
 }
 
 export const downloadAdminReport = async (type, token, format = 'csv') => {
-  const response = await fetch(`http://localhost:4000/api/admin/reports/export/${type}?format=${format}`, {
+  const apiBase = window.API_BASE || 'http://localhost:4000/api';
+  const response = await fetch(`${apiBase}/admin/reports/export/${type}?format=${format}`, {
     headers: { Authorization: `Bearer ${token}` },
   })
 

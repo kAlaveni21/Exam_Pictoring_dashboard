@@ -16,10 +16,14 @@ const templateRoutes = require('./routes/templateRoutes');
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 // Socket.IO setup
 const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true
   }
@@ -30,7 +34,7 @@ app.set('io', io);
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' })); // larger limit for screenshots
@@ -140,6 +144,15 @@ app.get('/api/active-students', (req, res) => {
     submitted: Array.from(submittedStudents)
   });
 });
+
+const path = require('path');
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
+  });
+}
 
 // MongoDB connection
 const PORT = process.env.PORT || 4000;

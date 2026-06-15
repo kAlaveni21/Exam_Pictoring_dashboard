@@ -188,7 +188,7 @@ const ExamPage = () => {
 
   // Socket connection
   useEffect(() => {
-    socketRef.current = io('http://localhost:4000')
+    socketRef.current = io(window.SOCKET_URL || 'http://localhost:4000')
 
     return () => {
       if (socketRef.current) {

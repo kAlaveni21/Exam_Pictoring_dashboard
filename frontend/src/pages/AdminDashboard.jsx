@@ -213,7 +213,7 @@ const AdminDashboard = () => {
   }, [refreshDashboard])
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:4000')
+    socketRef.current = io(window.SOCKET_URL || 'http://localhost:4000')
 
     socketRef.current.on('connect', () => setConnected(true))
     socketRef.current.on('disconnect', () => setConnected(false))
