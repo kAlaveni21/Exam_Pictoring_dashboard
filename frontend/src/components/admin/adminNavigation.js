@@ -1,0 +1,31 @@
+import {
+  FiAward,
+  FiBell,
+  FiCalendar,
+  FiFileText,
+  FiGrid,
+  FiList,
+  FiMonitor,
+  FiPieChart,
+  FiPlus,
+  FiShield,
+  FiUser,
+  FiUsers,
+} from 'react-icons/fi'
+
+export const adminSidebarItems = [
+  { label: 'Dashboard', path: '/admin', icon: FiGrid },
+  { label: 'Create Exam', path: '/admin/create-exam', icon: FiPlus },
+  { label: 'Manage Exams', path: '/admin/manage-exams', icon: FiFileText },
+  { label: 'Exam Calendar', path: '/admin/exam-calendar', icon: FiCalendar },
+  { label: 'Live Proctoring', path: '/admin/live-proctoring', icon: FiMonitor },
+  { label: 'Students', path: '/admin/students', icon: FiUsers },
+  { label: 'Results', path: '/admin/results', icon: FiAward },
+  { label: 'Leaderboard', path: '/admin/leaderboard', icon: FiAward },
+  { label: 'Reports', path: '/admin/reports', icon: FiShield },
+  { label: 'Analytics', path: '/admin/analytics', icon: FiPieChart },
+  { label: 'Question Analysis', path: '/admin/question-analysis', icon: FiPieChart },
+  { label: 'Activity Logs', path: '/admin/activity-logs', icon: FiList },
+  { label: 'Notifications', path: '/admin/notifications', icon: FiBell },
+  { label: 'Profile', path: '/admin/profile', icon: FiUser },
+]
