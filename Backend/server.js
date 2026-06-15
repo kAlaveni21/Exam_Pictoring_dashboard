@@ -146,17 +146,10 @@ app.get('/api/active-students', (req, res) => {
   });
 });
 
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  app.use((req, res, next) => {
-    if (req.method === 'GET' && req.accepts('html')) {
-      res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
-    } else {
-      next();
-    }
-  });
-}
+// Since frontend is hosted separately on Vercel, we only serve a health check
+app.get('/', (req, res) => {
+  res.json({ status: 'success', message: 'API is running successfully on Render!' });
+});
 
 // MongoDB connection
 const PORT = process.env.PORT || 4000;
